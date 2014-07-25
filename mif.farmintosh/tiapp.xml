@@ -8,7 +8,7 @@
     <description>Applicazione per la gestione della farmacia in Italia.</description>
     <copyright>2014 by Farmintosh</copyright>
     <icon>appicon.png</icon>
-    <fullscreen>false</fullscreen>
+    <fullscreen>true</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid>c7746175-220b-46b8-87c5-a41b89429d1e</guid>
@@ -34,7 +34,7 @@
                 <key>UIStatusBarHidden</key>
                 <false/>
                 <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleDefault</string>
+                <string>UIStatusBarStyleLightContent</string>
             </dict>
         </plist>
     </ios>
