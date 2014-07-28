@@ -83,7 +83,7 @@ var tornaButton = Ti.UI.createButton({
 recuperaView.add(tornaButton);
 
 tornaButton.addEventListener('click', function(){
-	win.close({ transition: getTransitionsStyle('curldown')});
+	win.close({ transition: getTransitionsStyle('flipfromright')});
 });
 
-win.open({ transition: getTransitionsStyle('curlup')});
+win.open({ transition: getTransitionsStyle('flipfromleft')});

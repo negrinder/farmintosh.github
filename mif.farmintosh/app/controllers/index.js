@@ -105,9 +105,9 @@ loginButton.addEventListener('click', function(){
 	}
 });
 
-var richiediButton = Ti.UI.createButton({
+var recuperaButton = Ti.UI.createButton({
   borderStyle: "Titanium.UI.INPUT_BORDERSTYLE_NONE",
-  title:'richiedi password',
+  title:'recupera password',
   color: '#ffffff',
   font:{
 	fontSize:12,
@@ -118,9 +118,9 @@ var richiediButton = Ti.UI.createButton({
   width: 245,
   height: 20
 });
-loginview.add(richiediButton);
+loginview.add(recuperaButton);
 
-richiediButton.addEventListener('click', function(){
+recuperaButton.addEventListener('click', function(){
     Alloy.createController('recupera_password');
 });
 

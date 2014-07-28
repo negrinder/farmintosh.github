@@ -1,7 +1,7 @@
 Ti.include('utility.js');
 
 var win = Ti.UI.createWindow({
-    backgroundColor:'#007c84'
+    backgroundColor:'#a6c8d2'
 });
 
 var cruscottoView = Ti.UI.createView({
@@ -17,7 +17,7 @@ var containerView = Ti.UI.createView({
     top: 21,
     left: 0,
     right: 0,
-    height: 520.5
+    height: 520
 });
 cruscottoView.add(containerView);
 
@@ -68,13 +68,137 @@ var benvenuto = Ti.UI.createLabel({
 });
 containerView.add(benvenuto);
 
+/* --------------------------------------------------------
+ * ------------- inserimento menu button ------------------
+ * -------------------------------------------------------- 
+ */
+
+var funzioneBadge = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 87,
+    left: 10
+});
+containerView.add(funzioneBadge);
+
+var funzioneIncasso = Ti.UI.createView({
+    backgroundColor:'#f4971b',
+    height: 94,
+    width: 197,
+    top: 87,
+    left: 113
+});
+containerView.add(funzioneIncasso);
+
+/*
+ * fine linea 1
+ */
+
+var funzioneTimbrature = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 190,
+    left: 10
+});
+containerView.add(funzioneTimbrature);
+
+var funzioneComunicazione = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 190,
+    left: 113
+});
+containerView.add(funzioneComunicazione);
+
+var funzioneRapportino = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 190,
+    left: 216
+});
+containerView.add(funzioneRapportino);
+
+/*
+ * fine linea 2
+ */
+
+var funzioneVendita = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 293,
+    left: 10
+});
+containerView.add(funzioneVendita);
+
+var funzioneMagazzino = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 293,
+    left: 113
+});
+containerView.add(funzioneMagazzino);
+
+var funzioneOrdini = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 293,
+    left: 216
+});
+containerView.add(funzioneOrdini);
+
+/*
+ * fine linea 3
+ */
+
+var funzioneAggiorna = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 396,
+    left: 10
+});
+containerView.add(funzioneAggiorna);
+
+var funzioneContatti = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 396,
+    left: 113
+});
+containerView.add(funzioneContatti);
+
+var funzioneAssistenza = Ti.UI.createView({
+    backgroundColor:'#007c84',
+    height: 94,
+    width: 94,
+    top: 396,
+    left: 216
+});
+containerView.add(funzioneAssistenza);
+
+/*
+ * fine linea 4
+ */
+
+/* --------------------------------------------------------
+ * -------------------------------------------------------- 
+ */
+
 var footerView = Ti.UI.createView({
     backgroundColor:'#00262f',
     layout: 'composite',
-    top: 520.5,
+    top: 520,
     left: 0,
     right: 0,
-    height: 47.5
+    height: 48
 });
 cruscottoView.add(footerView);
 
