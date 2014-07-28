@@ -14,7 +14,7 @@ function getTransitionsStyle(type){
 			pageTransitionStyle= Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT;
 			break;
 		case 'none':
-			pageTransitionStyle= Ti.UI.iPhone.AnimationStyle.NONE;
+			pageTransitionStyle= Ti.UI.iPhone.AnimationStyle.NONE;			
 			break;
 	}	
 	return pageTransitionStyle;
