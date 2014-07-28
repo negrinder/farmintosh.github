@@ -4,41 +4,22 @@ var win = Ti.UI.createWindow({
 
 var loginview = Ti.UI.createView({
     layout: 'composite',
-    center: {x: '50%', y: '50%'},
+    center: {x: '50%'},
     width: 245,
-    height: 150
+    height: '100%'
 });
 win.add(loginview);
 
-var titolo1 = Titanium.UI.createLabel({
-    color: '#ffffff',
-    text:'sistema',
-    font:{
-        fontSize:34,
-        fontFamily: 'SegoeUI-Light'
-    },
-    textAlign:'left',
-    width: 245,
-    top: 50
+var imageLogo = Ti.UI.createImageView({
+  image:'/images/logomacinfarma_b.png',
+  center: {x: '50%', y: 100},
+  width: 170
 });
-win.add(titolo1);
-
-var titolo2 = Titanium.UI.createLabel({
-    color: '#ffffff',
-    text:'farmacia',
-    font:{
-        fontSize:34,
-        fontFamily: 'SegoeUI-Light'
-    },
-    textAlign:'left',
-    width: 245,
-    top: 84
-});
-win.add(titolo2);
+win.add(imageLogo);
 
 var imageLogin = Ti.UI.createImageView({
   image:'/images/login.png',
-  top: 0,
+  top: 160,
   left: 0,
   height: 30,
   width: 30
@@ -54,7 +35,7 @@ var userField = Ti.UI.createTextField({
 	fontSize:18,
 	fontFamily: 'SegoeUI-Light'
   },
-  top: 0,
+  top: 160,
   left: 30,
   width: 215,
   height: 30,
@@ -70,7 +51,7 @@ loginview.add(userField);
 
 var imagePassword = Ti.UI.createImageView({
   image:'/images/password.png',
-  top: 44,
+  top: 204,
   left: 0,
   height: 30,
   width: 30	
@@ -87,7 +68,7 @@ var passwordField = Ti.UI.createTextField({
 	fontSize:18,
 	fontFamily: 'SegoeUI-Light'
   },
-  top: 44,
+  top: 204,
   left: 30,
   width: 215,
   height: 30,
@@ -109,14 +90,14 @@ var loginButton = Ti.UI.createButton({
 	fontSize:20,
 	fontFamily: 'SegoeUI-Light'
   },
-  top: 88,
+  top: 248,
   left: 0,
   width: 245,
   height: 30
 });
 loginview.add(loginButton);
 
-var text =  'richiedi password';
+var text =  'recupera password';
 var attr = Titanium.UI.iOS.createAttributedString({
     text: text,
     attributes: [
@@ -136,12 +117,16 @@ var richiediButton = Ti.UI.createButton({
 	fontSize:12,
 	fontFamily: 'SegoeUI-Light'
   },
-  top: 132,
+  top: 292,
   left: 0,
   width: 245,
   height: 20,
   attributedString: attr
 });
 loginview.add(richiediButton);
+
+richiediButton.addEventListener('click', function(){
+    
+});
 
 win.open();
