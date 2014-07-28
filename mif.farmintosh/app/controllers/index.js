@@ -97,16 +97,12 @@ var loginButton = Ti.UI.createButton({
 });
 loginview.add(loginButton);
 
-var text =  'recupera password';
-var attr = Titanium.UI.iOS.createAttributedString({
-    text: text,
-    attributes: [
-        {
-            type: Titanium.UI.iOS.ATTRIBUTE_UNDERLINES_STYLE,
-            value: Titanium.UI.iOS.ATTRIBUTE_UNDERLINE_STYLE_SINGLE,
-            range: [0, text.length]
-        }
-    ]
+loginButton.addEventListener('click', function(){
+	if(Ti.Platform.osname == "iphone"){
+	    Alloy.createController('cruscotto_iphone');
+	} else if(Ti.Platform.osname == "ipad"){
+	    Alloy.createController('cruscotto_ipad');
+	}
 });
 
 var richiediButton = Ti.UI.createButton({
@@ -120,13 +116,12 @@ var richiediButton = Ti.UI.createButton({
   top: 292,
   left: 0,
   width: 245,
-  height: 20,
-  attributedString: attr
+  height: 20
 });
 loginview.add(richiediButton);
 
 richiediButton.addEventListener('click', function(){
-    
+    Alloy.createController('recupera_password');
 });
 
 win.open();
