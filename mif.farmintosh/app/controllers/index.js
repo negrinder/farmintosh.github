@@ -1,3 +1,5 @@
+Ti.include('utility.js');
+
 var win = Ti.UI.createWindow({
     backgroundColor:'#007c84'
 });
@@ -124,4 +126,6 @@ recuperaButton.addEventListener('click', function(){
     Alloy.createController('recupera_password');
 });
 
-win.open();
+setTimeout(function() {
+	win.open({ transition: getTransitionsStyle('flipfromleft')});
+}, 3000);

@@ -102,7 +102,7 @@ var funzioneIncasso = Ti.UI.createView({
 });
 containerView.add(funzioneIncasso);
 
-var titolo2 = Ti.UI.createLabel({ text:'incasso', color: '#fff', font:{ fontSize: 16, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
+var titolo2 = Ti.UI.createLabel({ text:'statistiche', color: '#fff', font:{ fontSize: 16, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
 var descrizione2 = Ti.UI.createLabel({ text:'totale incasso giornaliero della farmacia', color: '#fff', font:{ fontSize: 9, fontFamily: 'SegoeUI-Light' }, top: 25, left: 6 });
 var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/incasso.png', left: 6, top: 67, height: 20 });
 funzioneIncasso.add(titolo2);
