@@ -57,7 +57,7 @@ var recuperaButton = Ti.UI.createButton({
   title:'recupera',
   color: '#ffffff',
   font:{
-	fontSize:20,
+	fontSize:22,
 	fontFamily: 'SegoeUI-Light'
   },
   top: 204,
@@ -72,7 +72,7 @@ var tornaButton = Ti.UI.createButton({
   title:'torna al login',
   color: '#ffffff',
   font:{
-	fontSize:12,
+	fontSize:14,
 	fontFamily: 'SegoeUI-Light'
   },
   top: 248,

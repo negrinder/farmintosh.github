@@ -89,7 +89,7 @@ var loginButton = Ti.UI.createButton({
   title:'login',
   color: '#ffffff',
   font:{
-	fontSize:20,
+	fontSize:22,
 	fontFamily: 'SegoeUI-Light'
   },
   top: 248,
@@ -105,6 +105,30 @@ loginButton.addEventListener('click', function(){
 	} else if(Ti.Platform.osname == "ipad"){
 	    Alloy.createController('cruscotto_ipad');
 	}
+	
+	/*Titanium.include('suds.js');
+		
+	var url = "http://server01v:7415/services/sistemafarmacia.asmx";
+	var callparams = {
+	    //FromCurrency: 'EUR',
+	    //ToCurrency: 'USD'
+	};
+	
+	var suds = new SudsClient({
+	    endpoint: url,
+	    targetNamespace: 'http://tempuri.org/'
+	});
+	
+	try {
+	    suds.invoke('HelloWorld', callparams, function(xmlDoc) {
+	        var results = xmlDoc.documentElement.getElementsByTagName('HelloWorldResult');
+	        if (results && results.length>0) {
+	            alert(results.item(0).text);
+	        }
+	    });
+	} catch(e) {
+	    Ti.API.error('Error: ' + e);
+	}*/
 });
 
 var recuperaButton = Ti.UI.createButton({
@@ -112,7 +136,7 @@ var recuperaButton = Ti.UI.createButton({
   title:'recupera password',
   color: '#ffffff',
   font:{
-	fontSize:12,
+	fontSize:14,
 	fontFamily: 'SegoeUI-Light'
   },
   top: 292,
