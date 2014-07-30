@@ -100,35 +100,63 @@ var loginButton = Ti.UI.createButton({
 loginview.add(loginButton);
 
 loginButton.addEventListener('click', function(){
-	if(Ti.Platform.osname == "iphone"){
-	    Alloy.createController('cruscotto_iphone');
-	} else if(Ti.Platform.osname == "ipad"){
-	    Alloy.createController('cruscotto_ipad');
-	}
-	
-	/*Titanium.include('suds.js');
-		
-	var url = "http://server01v:7415/services/sistemafarmacia.asmx";
-	var callparams = {
-	    //FromCurrency: 'EUR',
-	    //ToCurrency: 'USD'
-	};
-	
-	var suds = new SudsClient({
-	    endpoint: url,
-	    targetNamespace: 'http://tempuri.org/'
-	});
-	
-	try {
-	    suds.invoke('HelloWorld', callparams, function(xmlDoc) {
-	        var results = xmlDoc.documentElement.getElementsByTagName('HelloWorldResult');
-	        if (results && results.length>0) {
-	            alert(results.item(0).text);
-	        }
-	    });
-	} catch(e) {
-	    Ti.API.error('Error: ' + e);
-	}*/
+    var avvioMode = Ti.App.Properties.getString("avvio_preference", 'demo');
+	if(avvioMode == 'demo'){
+		Ti.App.Properties.setBool("appLogin", true);
+		if(Ti.Platform.osname == "iphone"){
+		    Alloy.createController('cruscotto_iphone');
+		} else if(Ti.Platform.osname == "ipad"){
+		    Alloy.createController('cruscotto_ipad');
+		}
+	} else if(avvioMode == 'local'){
+		var serverName = Ti.App.Properties.getString("server_preference");
+		if(serverName == ''){
+			var dialog = Ti.UI.createAlertDialog({  message: 'Il server non è stato specificato!',
+												    ok: 'Chiudi',
+												    title: 'Attenzione!'
+												 }).show();
+			return;
+		}
+		Titanium.include('suds.js');
+		var url = "http://" + serverName + "/services/sistemafarmacia.asmx";
+		var callparams = {
+		    //FromCurrency: 'EUR',
+		    //ToCurrency: 'USD'
+		};
+		var suds = new SudsClient({
+		    endpoint: url,
+		    targetNamespace: 'http://tempuri.org/'
+		});
+		try {
+		    suds.invoke('HelloWorld', callparams, function(xmlDoc) {
+		        var results = xmlDoc.documentElement.getElementsByTagName('HelloWorldResult');
+		        if (results && results.length>0) {
+		            alert(results.item(0).text);
+		            Ti.App.Properties.setBool("appLogin", true);
+	            	if(Ti.Platform.osname == "iphone"){
+					    Alloy.createController('cruscotto_iphone');
+					} else if(Ti.Platform.osname == "ipad"){
+					    Alloy.createController('cruscotto_ipad');
+					}
+				} else {
+		        	Ti.App.Properties.setBool("appLogin", false);
+		        	var dialog = Ti.UI.createAlertDialog({  message: 'Le credenziali di accesso inserite non sono corrette.',
+														    ok: 'Chiudi',
+														    title: 'Attenzione!'
+														 }).show();
+				}
+		    });
+		} catch(e) {
+		    Ti.API.error('Error: ' + e);
+		}
+	} else if(avvioMode == 'cloud'){
+		//to do implement
+		Ti.App.Properties.setBool("appLogin", false);
+		var dialog = Ti.UI.createAlertDialog({  message: 'Il servizio selezionato non è attivo.',
+											    ok: 'Chiudi',
+											    title: 'Attenzione!'
+											 }).show();
+	}	
 });
 
 var recuperaButton = Ti.UI.createButton({
@@ -149,6 +177,21 @@ loginview.add(recuperaButton);
 recuperaButton.addEventListener('click', function(){
     Alloy.createController('recupera_password');
 });
+
+/*********** SETTINGS ************/
+/*
+avvio_preference {demo, local, cloud}
+server_preference
+farmacia_preference
+licenza_preference
+username_preference
+password_preference
+autologin_preference
+versione_preference
+aggiornamento_preference
+*/
+/*********** APP LUNCH ************/
+Ti.App.Properties.setBool("appLogin", false);
 
 setTimeout(function() {
 	win.open({ transition: getTransitionsStyle('flipfromleft')});

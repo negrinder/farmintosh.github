@@ -44,6 +44,7 @@ var esciButton = Ti.UI.createButton({
 containerView.add(esciButton);
 
 esciButton.addEventListener('click', function(){
+	Ti.App.Properties.setBool("appLogin", false);
     win.close({ transition: getTransitionsStyle('flipfromright')});
 });
 
