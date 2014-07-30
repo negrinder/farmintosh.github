@@ -42,6 +42,7 @@ var userField = Ti.UI.createTextField({
   width: 215,
   height: 30,
   
+  value: Ti.App.Properties.getString("username_preference", ""),
   autocorrect: false,
   clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ONFOCUS,
   keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
@@ -74,6 +75,8 @@ var passwordField = Ti.UI.createTextField({
   left: 30,
   width: 215,
   height: 30,
+  
+  value: Ti.App.Properties.getString("password_preference", ""),
   autocorrect: false,
   clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ONFOCUS,
   keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
@@ -120,23 +123,30 @@ loginButton.addEventListener('click', function(){
 		Titanium.include('suds.js');
 		var url = "http://" + serverName + "/services/sistemafarmacia.asmx";
 		var callparams = {
-		    //FromCurrency: 'EUR',
-		    //ToCurrency: 'USD'
+		    username: userField.value,
+		    password: passwordField.value
 		};
 		var suds = new SudsClient({
 		    endpoint: url,
 		    targetNamespace: 'http://tempuri.org/'
 		});
 		try {
-		    suds.invoke('HelloWorld', callparams, function(xmlDoc) {
-		        var results = xmlDoc.documentElement.getElementsByTagName('HelloWorldResult');
+		    suds.invoke('Login', callparams, function(xmlDoc) {
+		        var results = xmlDoc.documentElement.getElementsByTagName('LoginResult');
 		        if (results && results.length>0) {
-		            alert(results.item(0).text);
-		            Ti.App.Properties.setBool("appLogin", true);
-	            	if(Ti.Platform.osname == "iphone"){
-					    Alloy.createController('cruscotto_iphone');
-					} else if(Ti.Platform.osname == "ipad"){
-					    Alloy.createController('cruscotto_ipad');
+		            var logged = results.item(0).text;
+		            Ti.App.Properties.setBool("appLogin", logged);
+		            if(Ti.App.Properties.getBool("appLogin")){
+		            	if(Ti.Platform.osname == "iphone"){
+						    Alloy.createController('cruscotto_iphone');
+						} else if(Ti.Platform.osname == "ipad"){
+						    Alloy.createController('cruscotto_ipad');
+						}
+					} else {
+						var dialog = Ti.UI.createAlertDialog({  message: 'Le credenziali di accesso inserite non sono corrette.',
+														    ok: 'Chiudi',
+														    title: 'Attenzione!'
+														 }).show();
 					}
 				} else {
 		        	Ti.App.Properties.setBool("appLogin", false);
