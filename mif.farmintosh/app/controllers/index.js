@@ -203,6 +203,56 @@ aggiornamento_preference
 /*********** APP LUNCH ************/
 Ti.App.Properties.setBool("appLogin", false);
 
+/******** PUSH NOTIFICATION *******/
+var Cloud = require('ti.cloud');
+ 
+Cloud.Users.login({ 
+	login: 'push123', 
+	password: 'push123' }, 
+	function (e) {
+			if (e.success) {
+		 		var user = e.users[0];
+		 		alert("Loggin successfully: " + user);
+		    } else {
+		        alert("Error: " + e.message);
+    }
+});
+
+Titanium.Network.registerForPushNotifications({
+    types: [
+        Titanium.Network.NOTIFICATION_TYPE_BADGE,
+        Titanium.Network.NOTIFICATION_TYPE_ALERT,
+        Titanium.Network.NOTIFICATION_TYPE_SOUND
+    ],
+	success:function(e)
+	{
+	    deviceToken = e.deviceToken;
+	    alert("deviceToken= " + deviceToken);
+	    Cloud.PushNotifications.subscribe({
+		    channel: 'mif_alert',
+		    type:'ios',
+		    device_token: deviceToken
+		}, function (e) {
+		    if (e.success) {
+		        alert('Success: ' + ((e.error && e.message) || JSON.stringify(e)));
+		    } else {
+		        alert('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
+		    }
+		});
+	},
+	error:function(e)
+	{
+	    alert("Error: " + e.message);
+	},
+	callback:function(e)
+	{
+	    alert("push notification received " + JSON.stringify(e.data));
+	}
+});
+
+/**********************************/
+
+
 setTimeout(function() {
 	win.open({ transition: getTransitionsStyle('flipfromleft')});
 }, 3000);
