@@ -38,28 +38,14 @@
         </dict>
         <dict>
             <key>Type</key>
-            <string>PSGroupSpecifier</string>
+            <string>PSToggleSwitchSpecifier</string>
             <key>Title</key>
-            <string>SERVER</string>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSTextFieldSpecifier</string>
-            <key>Title</key>
-            <string>Name</string>
+            <string>Aggiornamenti</string>
             <key>Key</key>
-            <string>server_preference</string>
+            <string>avvisi_preference</string>
             <key>DefaultValue</key>
-            <string></string>
-            <key>IsSecure</key>
-            <false/>
-            <key>KeyboardType</key>
-            <string>Alphabet</string>
-            <key>AutocapitalizationType</key>
-            <string>None</string>
-            <key>AutocorrectionType</key>
-            <string>No</string>
-        </dict>
+            <true/>
+        </dict>   
         <dict>
             <key>Type</key>
             <string>PSGroupSpecifier</string>
@@ -91,6 +77,24 @@
             <string>Licenza</string>
             <key>Key</key>
             <string>licenza_preference</string>
+            <key>DefaultValue</key>
+            <string></string>
+            <key>IsSecure</key>
+            <false/>
+            <key>KeyboardType</key>
+            <string>Alphabet</string>
+            <key>AutocapitalizationType</key>
+            <string>None</string>
+            <key>AutocorrectionType</key>
+            <string>No</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTextFieldSpecifier</string>
+            <key>Title</key>
+            <string>Server</string>
+            <key>Key</key>
+            <string>server_preference</string>
             <key>DefaultValue</key>
             <string></string>
             <key>IsSecure</key>
@@ -153,10 +157,6 @@
             <string>autologin_preference</string>
             <key>DefaultValue</key>
             <true/>
-            <key>TrueValue</key>
-            <string>YES</string>
-            <key>FalseValue</key>
-            <string>NO</string>
         </dict>        
         <dict>
             <key>Type</key>

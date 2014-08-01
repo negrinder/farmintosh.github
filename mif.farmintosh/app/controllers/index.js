@@ -204,54 +204,68 @@ aggiornamento_preference
 Ti.App.Properties.setBool("appLogin", false);
 
 /******** PUSH NOTIFICATION *******/
-var Cloud = require('ti.cloud');
- 
-Cloud.Users.login({ 
-	login: 'push123', 
-	password: 'push123' }, 
-	function (e) {
-			if (e.success) {
-		 		var user = e.users[0];
-		 		alert("Loggin successfully: " + user);
-		    } else {
-		        alert("Error: " + e.message);
-    }
-});
-
-Titanium.Network.registerForPushNotifications({
+// Require the Cloud module
+var Cloud = require("ti.cloud");
+var deviceToken = null;
+function subscribeToChannel () {
+    // Subscribes the device to the 'mif_alert' channel
+    Cloud.PushNotifications.subscribeToken({
+        device_token: deviceToken,
+        channel: 'mif_alert',
+        type: 'ios'
+    }, function (e) {
+        if (e.success) {
+            //alert('Subscribed');
+        } else {
+            //alert('Errore di sottoscrizione: ' + ((e.error && e.message) || JSON.stringify(e)));
+        }
+    });
+}
+function unsubscribeToChannel () {
+    // Unsubscribes the device from the 'mif_alert' channel
+    Cloud.PushNotifications.unsubscribeToken({
+        device_token: deviceToken,
+        channel: 'mif_alert',
+    }, function (e) {
+        if (e.success) {
+            //alert('Unsubscribed');
+        } else {
+            //alert('Errore di cancellazione: ' + ((e.error && e.message) || JSON.stringify(e)));
+        }
+    });
+}
+Ti.Network.registerForPushNotifications({
+    // Specifies which notifications to receive
     types: [
-        Titanium.Network.NOTIFICATION_TYPE_BADGE,
-        Titanium.Network.NOTIFICATION_TYPE_ALERT,
-        Titanium.Network.NOTIFICATION_TYPE_SOUND
+        Ti.Network.NOTIFICATION_TYPE_BADGE,
+        Ti.Network.NOTIFICATION_TYPE_ALERT,
+        Ti.Network.NOTIFICATION_TYPE_SOUND
     ],
-	success:function(e)
-	{
-	    deviceToken = e.deviceToken;
-	    alert("deviceToken= " + deviceToken);
-	    Cloud.PushNotifications.subscribe({
-		    channel: 'mif_alert',
-		    type:'ios',
-		    device_token: deviceToken
-		}, function (e) {
-		    if (e.success) {
-		        alert('Success: ' + ((e.error && e.message) || JSON.stringify(e)));
-		    } else {
-		        alert('Error: ' + ((e.error && e.message) || JSON.stringify(e)));
-		    }
-		});
-	},
-	error:function(e)
-	{
-	    alert("Error: " + e.message);
-	},
-	callback:function(e)
-	{
-	    alert("push notification received " + JSON.stringify(e.data));
-	}
+    success: deviceTokenSuccess,
+    error: deviceTokenError,
+    callback: receivePush
 });
-
+// Process incoming push notifications
+function receivePush(e) {
+    //alert('Notifica ricevuta: ' + JSON.stringify(e));
+    //alert(e.data.aps.alert);
+    Titanium.UI.iPhone.appBadge=0;
+}
+// Save the device token for subsequent API calls
+function deviceTokenSuccess(e) {
+    deviceToken = e.deviceToken;
+    //alert(deviceToken);
+    if(Ti.App.Properties.getBool("avvisi_preference")){
+		subscribeToChannel();
+	} else {
+		unsubscribeToChannel();
+	}
+}
+// Error to register push notifications
+function deviceTokenError(e) {
+    //alert('Registrazione alle notifiche fallita! [' + e.error + ']');
+}
 /**********************************/
-
 
 setTimeout(function() {
 	win.open({ transition: getTransitionsStyle('flipfromleft')});

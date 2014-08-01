@@ -379,4 +379,7 @@ footerView.add(helpButton);
 /* --------------------------------------------------------
  * -------------------------------------------------------- 
  */
+
+Titanium.UI.iPhone.appBadge=0;
+
 win.open({ transition: getTransitionsStyle('flipfromleft')});
