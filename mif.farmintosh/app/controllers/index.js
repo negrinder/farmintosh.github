@@ -134,8 +134,9 @@ loginButton.addEventListener('click', function(){
 		    suds.invoke('Login', callparams, function(xmlDoc) {
 		        var results = xmlDoc.documentElement.getElementsByTagName('LoginResult');
 		        if (results && results.length>0) {
-		            var logged = results.item(0).text;
-		            Ti.App.Properties.setBool("appLogin", logged);
+		            var data = JSON.parse(results.item(0).text);
+		            Ti.App.Properties.setBool("appLogin", data.SIFA_UTEL_FLAG_ATTIVO);
+		            Ti.App.Properties.setObject('userLogged', data);
 		            if(Ti.App.Properties.getBool("appLogin")){
 		            	if(Ti.Platform.osname == "iphone"){
 						    Alloy.createController('cruscotto_iphone');

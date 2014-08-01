@@ -57,8 +57,16 @@ var seperator = Ti.UI.createView({
 });
 containerView.add(seperator);
 
+var utente = Ti.App.Properties.getObject('userLogged');
+var messaggio = '';
+if(new Date().getHours() > 12){
+	messaggio = 'Buonasera';
+} else {
+	messaggio = 'Buongiorno';
+}
+
 var benvenuto = Ti.UI.createLabel({
-    text:'Benvenuto Utente',
+    text:messaggio + ', ' + utente.SIFA_UTEL_NOME + ' ' + utente.SIFA_UTEL_COGNOME,
 	color: '#7f9296',
 	  font:{
 		fontSize: 28,
@@ -82,6 +90,9 @@ var funzioneBadge = Ti.UI.createView({
     width: 140,
     top: 180,
     left: 36
+});
+funzioneBadge.addEventListener('click', function(){
+	Alloy.createController('badge');
 });
 containerView.add(funzioneBadge);
 
