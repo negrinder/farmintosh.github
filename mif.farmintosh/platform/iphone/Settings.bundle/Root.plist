@@ -38,16 +38,6 @@
         </dict>
         <dict>
             <key>Type</key>
-            <string>PSToggleSwitchSpecifier</string>
-            <key>Title</key>
-            <string>Aggiornamenti</string>
-            <key>Key</key>
-            <string>avvisi_preference</string>
-            <key>DefaultValue</key>
-            <true/>
-        </dict>   
-        <dict>
-            <key>Type</key>
             <string>PSGroupSpecifier</string>
             <key>Title</key>
             <string>FARMACIA</string>
@@ -152,12 +142,42 @@
             <key>Type</key>
             <string>PSToggleSwitchSpecifier</string>
             <key>Title</key>
-            <string>Login Automatico</string>
+            <string>Accesso Automatico</string>
             <key>Key</key>
             <string>autologin_preference</string>
             <key>DefaultValue</key>
             <true/>
-        </dict>        
+        </dict>           
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
+            <key>Title</key>
+            <string>AGGIORNAMENTI</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSToggleSwitchSpecifier</string>
+            <key>Title</key>
+            <string>Notifiche</string>
+            <key>Key</key>
+            <string>avvisi_preference</string>
+            <key>DefaultValue</key>
+            <true/>
+        </dict>  
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Data Ultimo</string>
+            <key>Key</key>
+            <string>aggiornamento_preference</string>
+            <key>DefaultValue</key>
+            <string>01.01.2014</string>
+            <key>Titles</key>
+            <array>
+                <string>01.01.2014</string>
+            </array>
+        </dict>
         <dict>
             <key>Type</key>
             <string>PSGroupSpecifier</string>
@@ -176,20 +196,6 @@
             <key>Titles</key>
             <array>
                 <string>1.0.0</string>
-            </array>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSTitleValueSpecifier</string>
-            <key>Title</key>
-            <string>Aggiornamento</string>
-            <key>Key</key>
-            <string>aggiornamento_preference</string>
-            <key>DefaultValue</key>
-            <string>01.01.2014</string>
-            <key>Titles</key>
-            <array>
-                <string>01.01.2014</string>
             </array>
         </dict>
         <dict>

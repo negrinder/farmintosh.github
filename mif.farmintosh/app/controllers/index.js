@@ -268,5 +268,12 @@ function deviceTokenError(e) {
 /**********************************/
 
 setTimeout(function() {
+	win.addEventListener("open", controllaAccessoAutomatico);
 	win.open({ transition: getTransitionsStyle('flipfromleft')});
 }, 3000);
+
+function controllaAccessoAutomatico() {
+    if(Ti.App.Properties.getBool("autologin_preference")){
+		loginButton.fireEvent('click');
+	}
+}
