@@ -5,7 +5,7 @@ Ti.include('utility.js');
  * ----------------------------------- 
  */
 
-var win = Ti.UI.createWindow({
+var ctrl = Ti.UI.createWindow({
     backgroundColor:'#e6e6f0',
     exitOnClose: true,
   	fullscreen: true	
@@ -16,7 +16,7 @@ var cruscottoView = Ti.UI.createView({
     width: '100%',
 	height: '100%'
 });
-win.add(cruscottoView);
+ctrl.add(cruscottoView);
 
 var headerView = Ti.UI.createView({
     backgroundColor:'#00515a',
@@ -48,20 +48,20 @@ var tornaButton = Ti.UI.createButton({
   top: 0,
   left: 10
 });
-headerView.add(tornaButton);
 tornaButton.addEventListener('click', function(){
-	win.close({ transition: getTransitionsStyle('flipfromright')});
+	ctrl.close();
 });
+headerView.add(tornaButton);
 cruscottoView.add(headerView);
 
-var linea0 = Ti.UI.createView({
+var linea00 = Ti.UI.createView({
     backgroundColor: '#73b1ba',
     top: 40,
     left: 0,
     width: '100%',
     height: 4
 });
-cruscottoView.add(linea0);
+cruscottoView.add(linea00);
 
 var myPersonalHeight = 0;
 if(Ti.Platform.osname == "iphone"){
