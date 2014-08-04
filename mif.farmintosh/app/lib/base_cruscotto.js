@@ -13,13 +13,6 @@ var cruscottoView = Ti.UI.createView({
 });
 win.add(cruscottoView);
 
-var myPersonalHeight = 0;
-if(Ti.Platform.osname == "iphone"){
-	myPersonalHeight = 472;
-} else if(Ti.Platform.osname == "ipad"){
-	myPersonalHeight = 672;
-}
-
 /* ---------------- header ------------------------- */
 
 var headerView = Ti.UI.createView({
@@ -79,7 +72,7 @@ var scrollcontainerView = Ti.UI.createScrollableView({
     top: 48,
     left: 0,
     right: 0,
-    height: myPersonalHeight
+    bottom: 48
 });
 scrollcontainerView.addEventListener('scrollend', function (e) {
     colorizzaButton(e.currentPage);
@@ -87,29 +80,25 @@ scrollcontainerView.addEventListener('scrollend', function (e) {
 cruscottoView.add(scrollcontainerView);
 
 /* ---------------- containers ------------------------- */
-var containerView = Ti.UI.createView({
+var containerView = Ti.UI.createScrollView({
     top: 0,
     left: 0,
-    right: 0,
-    height: myPersonalHeight
+    right: 0
 });
 var reportView = Ti.UI.createView({
     top: 0,
     left: 0,
     right: 0,
-    height: myPersonalHeight
 });
 var settingsView = Ti.UI.createView({
     top: 0,
     left: 0,
     right: 0,
-    height: myPersonalHeight
 });
 var helpView = Ti.UI.createView({
     top: 0,
     left: 0,
     right: 0,
-    height: myPersonalHeight
 });
 scrollcontainerView.addView(containerView);
 scrollcontainerView.addView(reportView);
@@ -168,7 +157,7 @@ helpView.add(titolo4);
 var footerView = Ti.UI.createView({
     backgroundColor:'#00262f',
     layout: 'composite',
-    top: myPersonalHeight + 48,
+    bottom: 0,
     left: 0,
     right: 0,
     height: 48
@@ -177,7 +166,7 @@ cruscottoView.add(footerView);
 
 var linea0 = Ti.UI.createView({
     backgroundColor: '#73b1ba',
-    top: myPersonalHeight + 44,
+    bottom: 48,
     left: 0,
     width: 80,
     height: 4
@@ -272,6 +261,9 @@ if(Ti.Platform.osname == "ipad"){
 }
 
 function colorizzaButton(numero){
+	if(numero == null){
+		numero = 0;
+	}	
 	linea0.left = 81*numero;
 	deselezionaButton(cruscottoButton);
 	deselezionaButton(reportButton);

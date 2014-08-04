@@ -202,3 +202,11 @@ funzioneAssistenza.add(titolo11);
 funzioneAssistenza.add(descrizione11);
 funzioneAssistenza.add(icona11);
 /* ------------------------------------------------------ */
+
+/* ----------------------- spazio ----------------------- */
+var spazio = Ti.UI.createView({
+    width: '100%',
+    height: 27,
+    top: 442
+});
+containerView.add(spazio);
