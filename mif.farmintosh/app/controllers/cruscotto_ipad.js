@@ -41,22 +41,26 @@ funzioneTimbrature.add(descrizione3);
 funzioneTimbrature.add(icona3);
 /* ------------------------------------------------------ */
 
-/* --------------------- incasso ------------------------ */
-var funzioneIncasso = Ti.UI.createView({
-    backgroundColor:'#f4971b',
+/* --------------------- farmacia ----------------------- */
+var funzioneFarmacia = Ti.UI.createView({
+    backgroundColor:'#d1b50a',
     height: 140,
     width: 438,
     top: 132,
     left: 334
 });
-containerView.add(funzioneIncasso);
+containerView.add(funzioneFarmacia);
 
-var titolo2 = Ti.UI.createLabel({ text:'statistiche', color: '#fff', font:{ fontSize: 22, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
-var descrizione2 = Ti.UI.createLabel({ text:'totale incasso giornaliero della farmacia', color: '#fff', font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' }, top: 30, left: 6 });
-var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/incasso.png', left: 6, top: 100, height: 25 });
-funzioneIncasso.add(titolo2);
-funzioneIncasso.add(descrizione2);
-funzioneIncasso.add(icona2);
+var titolo2 = Ti.UI.createLabel({ text:'farmacia', color: '#fff', font:{ fontSize: 22, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
+var descrizione2 = Ti.UI.createLabel({ text:'le operazioni verranno eseguite su:', color: '#fff', font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' }, top: 30, left: 6 });
+var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/cambia.png', left: 6, top: 100, height: 25 });
+
+var farmacia2 = Ti.UI.createLabel({ text:'FARMACIA BUCCELLA', color: '#514708', font:{ fontSize: 24, fontFamily: 'SegoeUI-Light', fontWeight: 'bold' }, top: 48, left: 6 });
+
+funzioneFarmacia.add(titolo2);
+funzioneFarmacia.add(descrizione2);
+funzioneFarmacia.add(farmacia2);
+funzioneFarmacia.add(icona2);
 /* ------------------------------------------------------ */
 
 /* --------------------- comunicazioni ------------------ */

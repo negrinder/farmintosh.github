@@ -1,7 +1,7 @@
 Ti.include('utility.js');
 
 var win = Ti.UI.createWindow({
-    backgroundColor:'#e6e6f0',
+    backgroundColor:'#e7e8ea',
     exitOnClose: true,
   	fullscreen: true	
 });
@@ -45,6 +45,7 @@ var esciButton = Ti.UI.createButton({
 });
 esciButton.addEventListener('click', function(){
 	Ti.App.Properties.setBool("appLogin", false);
+	Ti.App.Properties.setObject('userLogged', null);
     win.close({ transition: getTransitionsStyle('flipfromright')});
 });
 headerView.add(esciButton);
@@ -126,6 +127,12 @@ var benvenuto = Ti.UI.createLabel({
     right: 10
 });
 containerView.add(benvenuto);
+
+//carica farmacie da utente
+if(!isDemo){
+	getFarmacie(utente.SIFA_UTEL_ID_UTENTE);
+}
+//-------------------------
 
 var titolo2 = Ti.UI.createLabel({
     text: 'Statistiche',

@@ -138,7 +138,7 @@ loginButton.addEventListener('click', function(){
 		            Ti.App.Properties.setBool("appLogin", data.SIFA_UTEL_FLAG_ATTIVO);
 		            Ti.App.Properties.setObject('userLogged', data);
 		            if(Ti.App.Properties.getBool("appLogin")){
-		            	if(Ti.Platform.osname == "iphone"){
+						if(Ti.Platform.osname == "iphone"){
 						    Alloy.createController('cruscotto_iphone');
 						} else if(Ti.Platform.osname == "ipad"){
 						    Alloy.createController('cruscotto_ipad');

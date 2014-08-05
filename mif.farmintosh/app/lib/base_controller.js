@@ -6,7 +6,7 @@ Ti.include('utility.js');
  */
 
 var ctrl = Ti.UI.createWindow({
-    backgroundColor:'#e6e6f0',
+    backgroundColor:'#e7e8ea',
     exitOnClose: true,
   	fullscreen: true	
 });
@@ -63,17 +63,11 @@ var linea00 = Ti.UI.createView({
 });
 cruscottoView.add(linea00);
 
-var myPersonalHeight = 0;
-if(Ti.Platform.osname == "iphone"){
-	myPersonalHeight = 524;
-} else if(Ti.Platform.osname == "ipad"){
-	myPersonalHeight = 724;
-}
 var containerView = Ti.UI.createView({
     layout: 'composite',
     top: 44,
     left: 0,
     right: 0,
-    height: myPersonalHeight
+    height: '100%'
 });
 cruscottoView.add(containerView);

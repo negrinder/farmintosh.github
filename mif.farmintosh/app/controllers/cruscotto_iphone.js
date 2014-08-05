@@ -23,22 +23,46 @@ funzioneBadge.add(descrizione1);
 funzioneBadge.add(icona1);
 /* ------------------------------------------------------ */
 
-/* --------------------- incasso ------------------------ */
-var funzioneIncasso = Ti.UI.createView({
-    backgroundColor:'#f4971b',
+/* --------------------- farmacia ----------------------- */
+var funzioneFarmacia = Ti.UI.createView({
+    backgroundColor:'#d1b50a',
     height: 94,
     width: 197,
     top: 39,
     left: 113
 });
-containerView.add(funzioneIncasso);
+funzioneFarmacia.addEventListener('click', function(){
+	dialogFarmacia.show();
+});
+containerView.add(funzioneFarmacia);
 
-var titolo2 = Ti.UI.createLabel({ text:'statistiche', color: '#fff', font:{ fontSize: 16, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
-var descrizione2 = Ti.UI.createLabel({ text:'totale incasso giornaliero della farmacia', color: '#fff', font:{ fontSize: 9, fontFamily: 'SegoeUI-Light' }, top: 25, left: 6 });
-var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/incasso.png', left: 6, top: 67, height: 20 });
-funzioneIncasso.add(titolo2);
-funzioneIncasso.add(descrizione2);
-funzioneIncasso.add(icona2);
+var titolo2 = Ti.UI.createLabel({ text:'farmacia', color: '#514708', font:{ fontSize: 16, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
+var descrizione2 = Ti.UI.createLabel({ text:'le operazioni verranno eseguite su:', color: '#514708', font:{ fontSize: 9, fontFamily: 'SegoeUI-Light' }, top: 25, left: 6 });
+var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/cambia.png', opacity: 0.5, left: 6, top: 67, height: 20 });
+
+var farmacia2 = Ti.UI.createLabel({ text:'FARMACIA BUCCELLA', color: '#514708', font:{ fontSize: 14, fontFamily: 'Miryad Pro', fontWeight: 'bold' }, top: 38, left: 6 });
+
+funzioneFarmacia.add(titolo2);
+funzioneFarmacia.add(descrizione2);
+funzioneFarmacia.add(farmacia2);
+funzioneFarmacia.add(icona2);
+
+var optionsFarmacia = [];
+var lemiefarmacie = Ti.App.Properties.getObject('userFarmacie');
+if(lemiefarmacie){
+	_.each(lemiefarmacie, function(val){
+        optionsFarmacia.push(val.SIFA_FARM_NOME);
+    });
+    optionsFarmacia.push("Chiudi");
+}
+var dialogFarmacia = Titanium.UI.createOptionDialog({
+    title: 'Seleziona la farmacia con cui operare',
+    options: optionsFarmacia,
+    cancel: optionsFarmacia.length - 1
+});
+dialogFarmacia.addEventListener('click', function(e) {
+    
+});
 /* ------------------------------------------------------ */
 
 /* --------------------- timbrature --------------------- */
