@@ -207,7 +207,7 @@ var dialogReparto = Titanium.UI.createOptionDialog({
     cancel: optionsReparti.length - 1
 });
 dialogReparto.addEventListener('click', function(e) {
-	if(imieireparti[e.index]){
+	if(imieireparti){
 		repartoButton.title = imieireparti[e.index].SIFA_REPA_DESC_REPARTO.toUpperCase();
 	}
 });

@@ -11,7 +11,7 @@ var ctrl = Ti.UI.createWindow({
   	fullscreen: true	
 });
 
-var cruscottoView = Ti.UI.createView({
+var cruscottoView = Ti.UI.createScrollView({
     layout: 'composite',
     width: '100%',
 	height: '100%'
