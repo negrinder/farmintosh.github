@@ -197,6 +197,9 @@ if(imieireparti){
         optionsReparti.push(val.SIFA_REPA_DESC_REPARTO);
     });
     optionsReparti.push("Chiudi");
+} else {
+    optionsReparti.push("Reparto");
+    optionsReparti.push("Chiudi");
 }
 var dialogReparto = Titanium.UI.createOptionDialog({
     title: 'Seleziona il reparto di lavoro',
