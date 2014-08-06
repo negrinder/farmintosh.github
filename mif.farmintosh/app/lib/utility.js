@@ -5,6 +5,7 @@ var isDemo = Ti.App.Properties.getString("avvio_preference", 'demo') == 'demo';
 var utente = Ti.App.Properties.getObject('userLogged');
 /******************************************/
 
+/*********** Metodi Servizio ************/
 function getTransitionsStyle(type){
 	var pageTransitionStyle;	
 	switch(type){

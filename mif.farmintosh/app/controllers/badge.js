@@ -209,18 +209,45 @@ dialogReparto.addEventListener('click', function(e) {
 	}
 });
 
+//------------------ Time Picker ---------------------//
+containerView.add(Ti.UI.createLabel({
+    text: 'seleziona l\'ora:',
+	color: '#7f9296',
+	font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' },
+    top: 237, left: 10
+}));
+
+var oraView = Ti.UI.createView({
+    backgroundColor:'#fff',
+    layout: 'composite',
+    top: 262,
+    left: 10,
+    right: 10,
+    height: 70
+});
+containerView.add(oraView);
+
+var myPicker = Titanium.UI.createPicker({
+    type:Titanium.UI.PICKER_TYPE_TIME,
+    maxDate:new Date(),
+    useSpinner: true,
+    format24: true,
+    font:{ fontSize: 20 }
+});
+oraView.add(myPicker);
+
 //------------------ Timbra Turno ---------------------//
 containerView.add(Ti.UI.createLabel({
     text: 'timbra il turno:',
 	color: '#7f9296',
 	font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' },
-    top: 240, left: 10
+    top: 334, left: 10
 }));
 
 var giornoView = Ti.UI.createView({
     backgroundColor:'#fff',
     layout: 'composite',
-    top: 265,
+    top: 359,
     left: 10,
     right: 10,
     height: 110
@@ -297,6 +324,27 @@ var outImage = Ti.UI.createImageView({
 });
 outView.add(outImage);
 
+var annullaButton = Ti.UI.createButton({
+  borderStyle: "Titanium.UI.INPUT_BORDERSTYLE_NONE",
+  backgroundColor:'#fff',
+  title:'annulla timbratura',
+  color: '#ff0000',
+  font:{
+	fontSize:20,
+	fontFamily: 'SegoeUI-Light'
+  },
+  top: 479,
+  left: 10,
+  right: 10,
+  height: 35,
+  borderWidth: 1,
+  borderColor: '#ff0000'
+});
+annullaButton.addEventListener('click', function(){
+	setTurno(false);
+});
+containerView.add(annullaButton);
+
 function setTurno(isOpen){
 	inView.borderColor = (!isOpen ? '#66afb5' : '#e7e8ea');
 	inImage.image = (!isOpen ? 'images/pulsanti/entrata.png' : 'images/pulsanti/entrata_off.png');
@@ -305,6 +353,9 @@ function setTurno(isOpen){
 	repartoButton.color = (!isOpen ? '#36727c' : '#999');
 	repartoButton.borderColor = (!isOpen ? '#66afb5' : '#e7e8ea');
 	repartoButton.touchEnabled = !isOpen;
+	annullaButton.color = (isOpen ? '#ff0000' : '#999');
+	annullaButton.borderColor = (isOpen ? '#ff0000' : '#e7e8ea');
+	annullaButton.touchEnabled = isOpen;
 }
 setTurno(false);
 
