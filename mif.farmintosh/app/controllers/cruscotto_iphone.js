@@ -25,7 +25,7 @@ funzioneBadge.add(icona1);
 
 /* --------------------- farmacia ----------------------- */
 var funzioneFarmacia = Ti.UI.createView({
-    backgroundColor:'#d1b50a',
+    backgroundColor:'#f4971b',
     height: 94,
     width: 197,
     top: 39,
@@ -36,11 +36,11 @@ funzioneFarmacia.addEventListener('click', function(){
 });
 containerView.add(funzioneFarmacia);
 
-var titolo2 = Ti.UI.createLabel({ text:'farmacia', color: '#514708', font:{ fontSize: 16, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
-var descrizione2 = Ti.UI.createLabel({ text:'le operazioni verranno eseguite su:', color: '#514708', font:{ fontSize: 9, fontFamily: 'SegoeUI-Light' }, top: 25, left: 6 });
-var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/cambia.png', opacity: 0.5, left: 6, top: 67, height: 20 });
+var titolo2 = Ti.UI.createLabel({ text:'farmacia', color: '#2b1900', opacity: 0.9, font:{ fontSize: 16, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
+var descrizione2 = Ti.UI.createLabel({ text:'le operazioni verranno eseguite su:', color: '#2b1900', font:{ fontSize: 9, fontFamily: 'SegoeUI-Light' }, top: 25, left: 6 });
+var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/cambia.png', opacity: 0.6, left: 6, top: 67, height: 20 });
 
-var farmacia2 = Ti.UI.createLabel({ text:'FARMACIA BUCCELLA', color: '#514708', font:{ fontSize: 14, fontFamily: 'Miryad Pro', fontWeight: 'bold' }, top: 38, left: 6 });
+var farmacia2 = Ti.UI.createLabel({ text:'FARMACIA', color: '#2b1900', opacity: 0.7, font:{ fontSize: 14, fontFamily: 'Miryad Pro', fontWeight: 'bold' }, top: 38, left: 6 });
 
 funzioneFarmacia.add(titolo2);
 funzioneFarmacia.add(descrizione2);
@@ -50,6 +50,10 @@ funzioneFarmacia.add(icona2);
 var optionsFarmacia = [];
 var lemiefarmacie = Ti.App.Properties.getObject('userFarmacie');
 if(lemiefarmacie){
+	if(lemiefarmacie[0]){
+		Ti.App.Properties.setString('userFarmaciaSelezionata', lemiefarmacie[0].SIFA_FARM_ID_FARMACIA);
+    	farmacia2.text = lemiefarmacie[0].SIFA_FARM_NOME.toUpperCase();
+	}
 	_.each(lemiefarmacie, function(val){
         optionsFarmacia.push(val.SIFA_FARM_NOME);
     });
@@ -61,7 +65,10 @@ var dialogFarmacia = Titanium.UI.createOptionDialog({
     cancel: optionsFarmacia.length - 1
 });
 dialogFarmacia.addEventListener('click', function(e) {
-    
+	if(lemiefarmacie[e.index]){
+		Ti.App.Properties.setString('userFarmaciaSelezionata', lemiefarmacie[e.index].SIFA_FARM_ID_FARMACIA);
+	    farmacia2.text = lemiefarmacie[e.index].SIFA_FARM_NOME.toUpperCase();
+	}
 });
 /* ------------------------------------------------------ */
 

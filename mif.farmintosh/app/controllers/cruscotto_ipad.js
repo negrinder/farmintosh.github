@@ -43,24 +43,51 @@ funzioneTimbrature.add(icona3);
 
 /* --------------------- farmacia ----------------------- */
 var funzioneFarmacia = Ti.UI.createView({
-    backgroundColor:'#d1b50a',
+    backgroundColor:'#f4971b',
     height: 140,
     width: 438,
     top: 132,
     left: 334
 });
+funzioneFarmacia.addEventListener('click', function(){
+	dialogFarmacia.show();
+});
 containerView.add(funzioneFarmacia);
 
-var titolo2 = Ti.UI.createLabel({ text:'farmacia', color: '#fff', font:{ fontSize: 22, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
-var descrizione2 = Ti.UI.createLabel({ text:'le operazioni verranno eseguite su:', color: '#fff', font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' }, top: 30, left: 6 });
-var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/cambia.png', left: 6, top: 100, height: 25 });
+var titolo2 = Ti.UI.createLabel({ text:'farmacia', color: '#2b1900', opacity: 0.9, font:{ fontSize: 22, fontFamily: 'SegoeUI-Light' }, top: 4, left: 6 });
+var descrizione2 = Ti.UI.createLabel({ text:'le operazioni verranno eseguite su:', color: '#2b1900', font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' }, top: 30, left: 6 });
+var icona2 = Ti.UI.createImageView({ image:'/images/pulsanti/cambia.png', opacity: 0.6, left: 6, top: 100, height: 25 });
 
-var farmacia2 = Ti.UI.createLabel({ text:'FARMACIA BUCCELLA', color: '#514708', font:{ fontSize: 24, fontFamily: 'SegoeUI-Light', fontWeight: 'bold' }, top: 48, left: 6 });
+var farmacia2 = Ti.UI.createLabel({ text:'FARMACIA', color: '#2b1900', opacity: 0.7, font:{ fontSize: 24, fontFamily: 'Miryad Pro', fontWeight: 'bold' }, top: 48, left: 6 });
 
 funzioneFarmacia.add(titolo2);
 funzioneFarmacia.add(descrizione2);
 funzioneFarmacia.add(farmacia2);
 funzioneFarmacia.add(icona2);
+
+var optionsFarmacia = [];
+var lemiefarmacie = Ti.App.Properties.getObject('userFarmacie');
+if(lemiefarmacie){
+	if(lemiefarmacie[0]){
+		Ti.App.Properties.setString('userFarmaciaSelezionata', lemiefarmacie[0].SIFA_FARM_ID_FARMACIA);
+    	farmacia2.text = lemiefarmacie[0].SIFA_FARM_NOME.toUpperCase();
+	}
+	_.each(lemiefarmacie, function(val){
+        optionsFarmacia.push(val.SIFA_FARM_NOME);
+    });
+    optionsFarmacia.push("Chiudi");
+}
+var dialogFarmacia = Titanium.UI.createOptionDialog({
+    title: 'Seleziona la farmacia con cui operare',
+    options: optionsFarmacia,
+    cancel: optionsFarmacia.length - 1
+});
+dialogFarmacia.addEventListener('click', function(e) {
+	if(lemiefarmacie[e.index]){
+		Ti.App.Properties.setString('userFarmaciaSelezionata', lemiefarmacie[e.index].SIFA_FARM_ID_FARMACIA);
+	    farmacia2.text = lemiefarmacie[e.index].SIFA_FARM_NOME.toUpperCase();
+	}
+});
 /* ------------------------------------------------------ */
 
 /* --------------------- comunicazioni ------------------ */

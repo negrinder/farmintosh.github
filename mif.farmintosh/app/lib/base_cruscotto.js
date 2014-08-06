@@ -107,7 +107,6 @@ scrollcontainerView.addView(settingsView);
 scrollcontainerView.addView(helpView);
 
 /* ---------------- titolo di benvenuto ---------------- */
-var utente = Ti.App.Properties.getObject('userLogged');
 var messaggio = '';
 if(new Date().getHours() > 12){
 	messaggio = 'Buonasera';

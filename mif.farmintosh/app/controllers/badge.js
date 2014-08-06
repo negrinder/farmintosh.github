@@ -129,7 +129,7 @@ utenteView.add(Ti.UI.createLabel({
 }));
 utenteView.add(Ti.UI.createLabel({
     text: (utenteDetail==null) ? '--' : utente.SIFA_UTEL_EMAIL,
-	color: '#ff9a58',
+	color: '#555',
 	font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' },
     top: 56, left: 120
 }));
@@ -148,14 +148,164 @@ if(utenteDetail!=null && utente.SIFA_UTEL_FLAG_ADMIN==1){
 }
 utenteView.add(Ti.UI.createLabel({
     text: ruolo,
-	color: '#ff9a58',
+	color: '#555',
 	font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' },
     top: 90, left: 120
 }));
 
 //------------------ Informazioni Reparto ---------------------//
+containerView.add(Ti.UI.createLabel({
+    text: 'seleziona reparto:',
+	color: '#7f9296',
+	font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' },
+    top: 175, left: 10
+}));
+var repartoButton = Ti.UI.createButton({
+  borderStyle: "Titanium.UI.INPUT_BORDERSTYLE_NONE",
+  backgroundColor:'#fff',
+  title:'REPARTO',
+  color: '#36727c',
+  font:{
+	fontSize:20,
+	fontFamily: 'SegoeUI-Light'
+  },
+  top: 200,
+  left: 10,
+  right: 10,
+  height: 35,
+  borderWidth: 1,
+  borderColor: '#66afb5'
+});
+repartoButton.addEventListener('click', function(){
+	dialogReparto.show();
+});
+containerView.add(repartoButton);
 
+//carica reparti da utente
+if(!isDemo){
+	getReparti(utente.SIFA_UTEL_ID_UTENTE, Ti.App.Properties.getString('userFarmaciaSelezionata'));
+}
+//-------------------------
 
+var optionsReparti = [];
+var imieireparti = Ti.App.Properties.getObject('userReparti');
+if(imieireparti){
+	if(imieireparti[0]){
+		repartoButton.title = imieireparti[0].SIFA_REPA_DESC_REPARTO.toUpperCase();
+	}
+	_.each(imieireparti, function(val){
+        optionsReparti.push(val.SIFA_REPA_DESC_REPARTO);
+    });
+    optionsReparti.push("Chiudi");
+}
+var dialogReparto = Titanium.UI.createOptionDialog({
+    title: 'Seleziona il reparto di lavoro',
+    options: optionsReparti,
+    cancel: optionsReparti.length - 1
+});
+dialogReparto.addEventListener('click', function(e) {
+	if(imieireparti[e.index]){
+		repartoButton.title = imieireparti[e.index].SIFA_REPA_DESC_REPARTO.toUpperCase();
+	}
+});
 
+//------------------ Timbra Turno ---------------------//
+containerView.add(Ti.UI.createLabel({
+    text: 'timbra il turno:',
+	color: '#7f9296',
+	font:{ fontSize: 14, fontFamily: 'SegoeUI-Light' },
+    top: 240, left: 10
+}));
+
+var giornoView = Ti.UI.createView({
+    backgroundColor:'#fff',
+    layout: 'composite',
+    top: 265,
+    left: 10,
+    right: 10,
+    height: 110
+});
+containerView.add(giornoView);
+
+var calendarioView = Ti.UI.createView({
+  left: 10,
+  top: 10,
+  bottom: 10,
+  width: 90,
+  heigth: 90,
+  borderWidth: 1,
+  borderColor: '#e7e8ea'
+});
+giornoView.add(calendarioView);
+
+calendarioView.add(Ti.UI.createLabel({
+    text: moment().locale('it').format('MMMM').toUpperCase(),
+	color: '#999',
+	font:{ fontSize: 14, fontFamily: 'Miryad Pro' },
+	left: 0,
+	top: 10,
+	width: 90,
+	textAlign: 'center'
+}));
+calendarioView.add(Ti.UI.createLabel({
+    text: moment().locale('it').format('D'),
+	color: '#999',
+	font:{ fontSize: 60, fontFamily: 'Miryad Pro' },
+	left: 0,
+	top: 20,
+	width: 90,
+	textAlign: 'center'
+}));
+
+var inView = Ti.UI.createView({
+  left: 105,
+  top: 10,
+  bottom: 10,
+  width: 90,
+  heigth: 90,
+  borderWidth: 1,
+});
+inView.addEventListener('click', function(){
+	setTurno(true);
+});
+giornoView.add(inView);
+
+var inImage = Ti.UI.createImageView({
+  opacity: 0.7,
+  width: 55,
+  center: { x:'50%', y:'50%'}
+});
+inView.add(inImage);
+
+var outView = Ti.UI.createView({
+  left: 200,
+  top: 10,
+  bottom: 10,
+  width: 90,
+  heigth: 90,
+  borderWidth: 1,
+});
+outView.addEventListener('click', function(){
+	setTurno(false);
+});
+giornoView.add(outView);
+
+var outImage = Ti.UI.createImageView({
+  opacity: 0.7,
+  width: 55,
+  center: { x:'50%', y:'50%'}
+});
+outView.add(outImage);
+
+function setTurno(isOpen){
+	inView.borderColor = (!isOpen ? '#66afb5' : '#e7e8ea');
+	inImage.image = (!isOpen ? 'images/pulsanti/entrata.png' : 'images/pulsanti/entrata_off.png');
+	outView.borderColor = (isOpen ? '#f7cc78' : '#e7e8ea');
+	outImage.image = (isOpen ? 'images/pulsanti/uscita.png' : 'images/pulsanti/uscita_off.png');
+	repartoButton.color = (!isOpen ? '#36727c' : '#999');
+	repartoButton.borderColor = (!isOpen ? '#66afb5' : '#e7e8ea');
+	repartoButton.touchEnabled = !isOpen;
+}
+setTurno(false);
 
 ctrl.open({ modal:true });
