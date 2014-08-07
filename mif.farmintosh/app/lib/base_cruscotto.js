@@ -1,4 +1,6 @@
 Ti.include('utility.js');
+Ti.include('servizio.js');
+Ti.include('global.js');
 
 var win = Ti.UI.createWindow({
     backgroundColor:'#e7e8ea',
@@ -14,7 +16,6 @@ var cruscottoView = Ti.UI.createView({
 win.add(cruscottoView);
 
 /* ---------------- header ------------------------- */
-
 var headerView = Ti.UI.createView({
     layout: 'composite',
     top: 0,
@@ -127,12 +128,6 @@ var benvenuto = Ti.UI.createLabel({
 });
 containerView.add(benvenuto);
 
-//carica farmacie da utente
-if(!isDemo){
-	getFarmacie(utente.SIFA_UTEL_ID_UTENTE);
-}
-//-------------------------
-
 var titolo2 = Ti.UI.createLabel({
     text: 'Statistiche',
 	color: '#7f9296',
@@ -159,7 +154,6 @@ helpView.add(titolo4);
 
 
 /* ---------------------- footer ------------------------ */
-
 var footerView = Ti.UI.createView({
     backgroundColor:'#00262f',
     layout: 'composite',
@@ -296,7 +290,5 @@ function deselezionaButton(pulsante){
 }
 
 /* ------------------------------------------------------- */
-
 Titanium.UI.iPhone.appBadge=0;
-
 win.open({ transition: getTransitionsStyle('flipfromleft')});

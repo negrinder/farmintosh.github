@@ -181,37 +181,6 @@ repartoButton.addEventListener('click', function(){
 });
 containerView.add(repartoButton);
 
-//carica reparti da utente
-if(!isDemo){
-	getReparti(utente.SIFA_UTEL_ID_UTENTE, Ti.App.Properties.getString('userFarmaciaSelezionata'));
-}
-//-------------------------
-
-var optionsReparti = [];
-var imieireparti = Ti.App.Properties.getObject('userReparti');
-if(imieireparti){
-	if(imieireparti[0]){
-		repartoButton.title = imieireparti[0].SIFA_REPA_DESC_REPARTO.toUpperCase();
-	}
-	_.each(imieireparti, function(val){
-        optionsReparti.push(val.SIFA_REPA_DESC_REPARTO);
-    });
-    optionsReparti.push("Chiudi");
-} else {
-    optionsReparti.push("Reparto");
-    optionsReparti.push("Chiudi");
-}
-var dialogReparto = Titanium.UI.createOptionDialog({
-    title: 'Seleziona il reparto di lavoro',
-    options: optionsReparti,
-    cancel: optionsReparti.length - 1
-});
-dialogReparto.addEventListener('click', function(e) {
-	if(imieireparti){
-		repartoButton.title = imieireparti[e.index].SIFA_REPA_DESC_REPARTO.toUpperCase();
-	}
-});
-
 //------------------ Time Picker ---------------------//
 containerView.add(Ti.UI.createLabel({
     text: 'seleziona l\'ora:',
@@ -361,5 +330,36 @@ function setTurno(isOpen){
 	annullaButton.touchEnabled = isOpen;
 }
 setTurno(false);
+
+ctrl.addEventListener('open', function(){
+	//carica reparti da utente
+	var optionsReparti = [];
+	if(!isDemo){
+		getReparti(utente.SIFA_UTEL_ID_UTENTE, Ti.App.Properties.getString('userFarmaciaSelezionata'));
+	}	
+	var imieireparti = Ti.App.Properties.getObject('userReparti');
+	if(imieireparti){
+		if(imieireparti[0]){
+			repartoButton.title = imieireparti[0].SIFA_REPA_DESC_REPARTO.toUpperCase();
+		}
+		_.each(imieireparti, function(val){
+	        optionsReparti.push(val.SIFA_REPA_DESC_REPARTO);
+	    });
+	    optionsReparti.push("Chiudi");
+	} else {
+	    optionsReparti.push("Reparto");
+	    optionsReparti.push("Chiudi");
+	}
+	var dialogReparto = Titanium.UI.createOptionDialog({
+	    title: 'Seleziona il reparto di lavoro',
+	    options: optionsReparti,
+	    cancel: optionsReparti.length - 1
+	});
+	dialogReparto.addEventListener('click', function(e) {
+		if(imieireparti){
+			repartoButton.title = imieireparti[e.index].SIFA_REPA_DESC_REPARTO.toUpperCase();
+		}
+	});
+});
 
 ctrl.open({ modal:true });

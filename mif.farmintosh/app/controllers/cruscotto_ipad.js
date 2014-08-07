@@ -1,7 +1,5 @@
 Ti.include('base_cruscotto.js');
 
-/* --------------------- funzioni ----------------------- */
-
 /* --------------------- badge -------------------------- */
 var funzioneBadge = Ti.UI.createView({
     backgroundColor:'#007c84',
@@ -66,7 +64,6 @@ funzioneFarmacia.add(farmacia2);
 funzioneFarmacia.add(icona2);
 
 var optionsFarmacia = [];
-var lemiefarmacie = Ti.App.Properties.getObject('userFarmacie');
 if(lemiefarmacie){
 	if(lemiefarmacie[0]){
 		Ti.App.Properties.setString('userFarmaciaSelezionata', lemiefarmacie[0].SIFA_FARM_ID_FARMACIA);
@@ -75,6 +72,9 @@ if(lemiefarmacie){
 	_.each(lemiefarmacie, function(val){
         optionsFarmacia.push(val.SIFA_FARM_NOME);
     });
+    optionsFarmacia.push("Chiudi");
+} else {
+    optionsFarmacia.push("Farmacia Demo");
     optionsFarmacia.push("Chiudi");
 }
 var dialogFarmacia = Titanium.UI.createOptionDialog({

@@ -1,9 +1,6 @@
 Ti.include('utility.js');
-
-/* -----------------------------------
- * ------------- header --------------
- * ----------------------------------- 
- */
+Ti.include('servizio.js');
+Ti.include('global.js');
 
 var ctrl = Ti.UI.createWindow({
     backgroundColor:'#e7e8ea',
@@ -18,6 +15,7 @@ var cruscottoView = Ti.UI.createScrollView({
 });
 ctrl.add(cruscottoView);
 
+/* ---------------- header ------------------------- */
 var headerView = Ti.UI.createView({
     backgroundColor:'#00515a',
     layout: 'composite',
